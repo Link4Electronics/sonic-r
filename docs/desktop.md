@@ -14,8 +14,7 @@
 
 **Windows — no build needed.** Download `SONICR.EXE` from the
 [Releases page](https://github.com/jnmartin84/sonic-r/releases). It's a prebuilt,
-statically-linked 64-bit executable (built in MSYS2 UCRT64) that bundles all of
-its libraries, so there's nothing to install — put it in your data directory and
+statically-linked x86-64 executable that bundles all of its libraries, so there's nothing to install — put it in your data directory and
 double-click it.
 
 **macOS / Linux** — there's no prebuilt binary; build from source (it's quick,
