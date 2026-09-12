@@ -67,8 +67,17 @@ ifneq ($(IS_MINGW),)
   MATCHMAKER_CFLAGS = -DSONICR_MATCHMAKER -DMINIUPNP_STATICLIB
   MATCHMAKER_LIBS   = -lminiupnpc -lws2_32 -liphlpapi
 else
-  MATCHMAKER_CFLAGS = -DSONICR_MATCHMAKER
-  MATCHMAKER_LIBS   = -lminiupnpc
+  # miniupnpc lives outside the default compiler search path on macOS
+  # (Homebrew) and on many Linux distros, so ask pkg-config for the real
+  # -I/-L flags. Fall back to a bare -lminiupnpc if pkg-config can't see it.
+  MINIUPNPC_PC := $(shell pkg-config --exists miniupnpc && echo yes)
+  ifeq ($(MINIUPNPC_PC),yes)
+    MATCHMAKER_CFLAGS = -DSONICR_MATCHMAKER $(shell pkg-config --cflags miniupnpc)
+    MATCHMAKER_LIBS   = $(shell pkg-config --libs miniupnpc)
+  else
+    MATCHMAKER_CFLAGS = -DSONICR_MATCHMAKER
+    MATCHMAKER_LIBS   = -lminiupnpc
+  endif
 endif
 
 # Single-precision build: route sr_double → float. The actual DC build pairs
