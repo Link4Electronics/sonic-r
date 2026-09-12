@@ -11,7 +11,7 @@ x86-to-C translation done with the use of Ghidra and Claude Code
 (using Opus 4.6, Opus 4.8 and Fable 5). 
 
 This has been extensively tested and validated against live WinDbg sessions running 1998 SONICR.EXE,
-along with playtesting by many *detail-oriented* Sonic R fans (special thanks to Tongara and Neo.charmy).
+along with playtesting by many *detail-oriented* Sonic R fans (special thanks to Mittens, Tongara and Neo.charmy).
 
 We ran out of identifiable differences in gameplay behavior that could be attributed to anything other than switching from 80-bit x87 floating point to IEEE floating point math.
 
