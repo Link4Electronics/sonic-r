@@ -30,6 +30,8 @@ controls, network play, saves, and troubleshooting for that platform.
 
 ## Legal & credits
 
+I personally report every for-sale listing of my ports that are brought to my attention. I will get your 15 year old 100% feedback eBay account terminated.
+
 Sonic R and its characters, trademarks, and game assets are the property of
 Sega. This is a from-scratch reimplementation of the game engine — it contains
 no original Sega code — and you must own a copy of Sonic R to supply the track,
