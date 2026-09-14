@@ -495,7 +495,7 @@ void RenderHUD(void)
         viewportCount = g_numHumans;
     }
     else {
-        startViewport = 0;
+        startViewport = (unsigned int)(unsigned short)g_localPlayerIndex; /* 0x4CD2CD */
         viewportCount = 1;
     }
 

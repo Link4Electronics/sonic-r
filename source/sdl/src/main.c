@@ -1606,12 +1606,15 @@ race_start:
                 g_currentRenderCam = vpConfig;
             }
             else if (g_isNetworkGame != 0 || g_netSessionActive != 0) { /* 0x4CF5CD: line 623 */
-                /* Network: follow the LOCAL player but use viewport 0's config
-                 * (only viewport 0 is set up for full-screen on each machine). */
+                /* Network: camera for the LOCAL player into viewport[local]'s
+                 * config (0x4CF5E9-0x4CF5FF: 0x6E9924 + local*0xC8). Every
+                 * viewport has full-screen bounds when g_numHumans <= 1
+                 * (SetupViewportConfig 0x4CBA4C), so RenderHUD, rain, snow
+                 * and SpawnOtherParticle all index by local too. */
                 int localIdx = (int)(unsigned short)g_localPlayerIndex;
                 Player *player = &g_playerBase[localIdx];
                 CamStateEntry *camState = &g_camStateTable[localIdx];
-                int *vpConfig = (int *)((char *)g_viewportConfigArray + 0 * 0xC8);
+                int *vpConfig = (int *)((char *)g_viewportConfigArray + localIdx * 0xC8);
                 BuildCameraView(player, camState, (void *)vpConfig, (void *)camState);
                 SetViewportClipRect(vpConfig);
                 g_currentRenderCam = vpConfig;
@@ -1638,7 +1641,7 @@ race_start:
                         SpawnOtherParticle(vp);
                     }
                 } else {
-                    SpawnOtherParticle(0);
+                    SpawnOtherParticle((int)(unsigned short)g_localPlayerIndex); /* 0x4CF6CB */
                 }
             }
             /* clamp per-player ringCount to 999 */
